@@ -1,0 +1,4 @@
+.idea
+venv*
+/db/testing.db
+/tests/certificate.json

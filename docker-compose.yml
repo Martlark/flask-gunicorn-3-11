@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  app:
+    image: martlark/flask-gunicorn-3-11
+    ports:
+      - "18008:80"
+    volumes:
+      - ./persist:/persist
+    environment:
+      GUNICORN_THREADS: 4
+    restart: unless-stopped
+
