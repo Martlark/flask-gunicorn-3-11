@@ -14,6 +14,9 @@ migrations to the database structure, then loads and runs Flask app using Gunico
 
 Assumes code starts from main.py using `app` as the application variable. 
 
+NOTE: Flask and other package dependencies should be defined in your application's
+`requirements.txt` file.  This image does not include Flask or SQLAlchemy by default.
+
 ### Example main.py
     
     # start app for flask-gunicorn-3-11
@@ -99,15 +102,22 @@ Container will wait for the database to be ready and retry this many times.
 
 ### Flask application file
 
+This environment variable defines the app to be used
+for flask commands. By default, this is `main.py`.
+
     FLASK_APP=main.py
 
 ### Migration command
 
-Override the migration command.
+Migration will be done using `flask-migrate`. Reference: https://flask-migrate.readthedocs.io/en/latest/
 
-    FLASK_DB_UPGRADE=flask db upgrade
+For Alembic refer to their documentation. Reference: https://alembic.sqlalchemy.org/en/latest/index.html
 
-### Script to run before starting db and migration
+Override the migration command when not using `flask-migrate`.
+
+    FLASK_DB_UPGRADE="flask db upgrade"
+
+### Script to run after starting db and migration
 
 Run a script after the database is up and migration is completed.
 
@@ -119,9 +129,13 @@ Options to control how Gunicorn is started.
 
 #### Flask python app module and `app` variable
 
+Use this environment variable to change the default value of `main:app`.
+
     GUNICORN_MAIN="main:app"
 
 #### Number of threads
+
+Use this environment variable to change the default value of `2`.
 
     GUNICORN_THREADS="2"
 
