@@ -45,7 +45,10 @@ NOTE: Flask and other package dependencies should be defined in your application
     
     # copy over our app code
     COPY . /app
-    
+
+#### Examples
+
+Example Dockerfile and Python source can be found in the `martlark` directory.
 
 ## Options
 
@@ -88,8 +91,6 @@ When `SQLALCHEMY_DATABASE_URI` environment variable is set
 the container will wait for the database to start
 then run any migrations.
 
-If you do not want any migrations then set `FLASK_DB_UPGRADE` to `true`.
-
 #### Retry attempts
 
 Container will wait for the database to be ready and retry this many times.
@@ -112,6 +113,8 @@ for flask commands. By default, this is `main.py`.
 Migration will be done using `flask-migrate`. Reference: https://flask-migrate.readthedocs.io/en/latest/
 
 For Alembic refer to their documentation. Reference: https://alembic.sqlalchemy.org/en/latest/index.html
+
+If you do not want any migrations then set `FLASK_DB_UPGRADE` to `true`.
 
 Override the migration command when not using `flask-migrate`.
 
