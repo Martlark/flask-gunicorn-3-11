@@ -36,7 +36,7 @@ NOTE: Flask and other package dependencies should be defined in your application
 
 ### Example Dockerfile
     
-    FROM flask-gunicorn-3-11
+    FROM martlark/flask-gunicorn-3-11:latest
     
     # copy over our requirements.txt file
     COPY requirements.txt /tmp/
