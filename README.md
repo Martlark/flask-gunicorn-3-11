@@ -9,12 +9,8 @@ Includes:
 * Database pre and post start scripts
 * Scripts to run before starting server
 
-Upgrades to latest Pip, Installs from `requirements.txt`, starts the DB, performs any
+Upgrades to latest Pip, starts the DB, performs any
 migrations to the database structure, then loads and runs Flask app using Gunicorn.
-
-## Example Dockerfile
-
-    FROM martlark/flask-gunicorn-3-11
 
 Assumes code starts from main.py using `app` as the application variable. 
 
@@ -50,13 +46,34 @@ Assumes code starts from main.py using `app` as the application variable.
 
 ## Options
 
+Environment variables can be used to change the container startup process.
+
+Container will check for scripts in the `/persist/` folder which
+can be mapped into the container using the `volume` directive.
+
+Docker compose volumes example:
+    
+    version: '3.7'
+    
+    services:
+      app:
+        build: martlark
+        ports:
+          - "18008:80"
+        volumes:
+          - ./persist:/persist
+        environment:
+          GUNICORN_THREADS: 4
+        restart: unless-stopped
+
+
 ### Script to run before start
 
     /persist/before.sh
 
 ### Use SQLALCHEMY
 
-Set environment variable SQLALCHEMY_DATABASE_URI to enable SQLalchemy use.
+Set environment variable SQLALCHEMY_DATABASE_URI to enable SQLAlchemy database use.
 
 ### Script to run before starting db and migration
 
@@ -64,11 +81,19 @@ Set environment variable SQLALCHEMY_DATABASE_URI to enable SQLalchemy use.
 
 ### Options for waiting for db to start
 
+When `SQLALCHEMY_DATABASE_URI` environment variable is set
+the container will wait for the database to start
+then run any migrations.
+
+If you do not want any migrations then set `FLASK_DB_UPGRADE` to `true`.
+
 #### Retry attempts
+
+Container will wait for the database to be ready and retry this many times.
 
     DB_READY_RETRIES=20
 
-#### Seconds to wait between retries
+#### Seconds to wait between db ready retries
 
     DB_READY_SLEEP_SECONDS=2
 

@@ -1,4 +1,7 @@
 #!/bin/sh
+# exit if any errors
+set -e
+
 if [ -x "/persist/before.sh" ]
 then
   . "/persist/before.sh"
