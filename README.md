@@ -35,6 +35,18 @@ Assumes code starts from main.py using `app` as the application variable.
     
     app = create_app()
 
+### Example Dockerfile
+    
+    FROM flask-gunicorn-3-11
+    
+    # copy over our requirements.txt file
+    COPY requirements.txt /tmp/
+    # install required python packages
+    RUN pip install -r /tmp/requirements.txt
+    
+    # copy over our app code
+    COPY . /app
+    
 
 ## Options
 
@@ -90,4 +102,4 @@ Options to control how Gunicorn is started.
 
 #### Server Port
 
-    SERVER_PORT="80"
+    Exposed port is always 80

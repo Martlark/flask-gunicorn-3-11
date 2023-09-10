@@ -6,20 +6,27 @@ WORKDIR /app
 # upgrade pip
 RUN pip install -U pip
 
-# gunicord and utils
-RUN pip install gunicorn==20.1.0 rq
+# gunicorn and SQL utils
+RUN pip install gunicorn==20.1.0
 RUN pip install sqlalchemy-utils==0.40.0
 
-# copy over our requirements.txt file
-COPY requirements.txt /tmp/
-# install required python packages
-RUN pip install -r /tmp/requirements.txt
-
-# copy over our app code
 COPY . /app
 
 RUN mkdir -p /persist
 
+EXPOSE 80
+
 # start server
 
 ENTRYPOINT [ "bash", "entrypoint.sh" ]
+
+
+# add these Docker commands to:
+# * copy requirements.txt file
+# * install your requirements
+# * copy your app files
+#
+# FROM flask-gunicorn-3-11
+# COPY requirements.txt /tmp/
+# RUN pip install -r /tmp/requirements.txt
+# COPY . /app

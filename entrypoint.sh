@@ -27,4 +27,4 @@ then
   fi
 fi
 # start the server
-gunicorn -c gunicorn_conf.py "${GUNICORN_MAIN:-main:app}" --threads "${GUNICORN_THREADS:-2}" -b 0.0.0.0:"${SERVER_PORT:-80}"
+gunicorn -c gunicorn_conf.py "${GUNICORN_MAIN:-main:app}" --threads "${GUNICORN_THREADS:-2}" -b 0.0.0.0:80
