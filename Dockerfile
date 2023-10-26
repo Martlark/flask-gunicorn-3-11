@@ -7,7 +7,7 @@ WORKDIR /app
 RUN pip install -U pip
 
 # gunicorn and SQL utils
-RUN pip install gunicorn==20.1.0
+RUN pip install gunicorn[eventlet]==20.1.0
 RUN pip install sqlalchemy-utils==0.40.0
 
 COPY . /app

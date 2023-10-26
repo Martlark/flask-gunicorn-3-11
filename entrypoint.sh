@@ -9,7 +9,7 @@ fi
 # shellcheck disable=SC2086
 export PYTHONPATH="${PYTHONPATH}:."
 # shellcheck disable=SC2039
-if [ -v "${SQLALCHEMY_DATABASE_URI}" ]
+if [ -v SQLALCHEMY_DATABASE_URI ]
 then
   # do any db requirements
   # setup before db
