@@ -25,6 +25,7 @@ NOTE: Flask and other package dependencies should be defined in your application
     # from /app
     
     import os
+    import sys
     
     from app.app import create_app
     
@@ -38,6 +39,8 @@ NOTE: Flask and other package dependencies should be defined in your application
 
 ### Example Dockerfile
     
+Create a `Dockerfile` to start your application.
+
     FROM martlark/flask-gunicorn-3-11:latest
     
     # copy over our requirements.txt file
@@ -65,7 +68,7 @@ Docker compose volumes example:
     
     services:
       app:
-        build: martlark
+        build: .
         ports:
           - "18008:80"
         volumes:

@@ -4,7 +4,7 @@ version: '3.7'
 
 services:
   app:
-    build: martlark
+    build: .
     ports:
       - "18008:80"
     volumes:
